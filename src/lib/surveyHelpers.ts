@@ -16,13 +16,18 @@ export function explainKey(questionId: string): string {
   return `${questionId}_explain`;
 }
 
-/** Options from a prior multi-select question that the respondent selected, in the source question's display order. */
+/**
+ * Options from a prior multi-select question that the respondent selected, in the source
+ * question's display order. Excludes "none of the above" style options -- there's nothing
+ * to rate, rank, or explain about a "none" pick, so dependent questions (a ratings matrix,
+ * a ranking, a "why did you pick these" free-text prompt) never see it as a row.
+ */
 export function resolveRowOptions(sourceQuestionId: string, answers: AnswersState): ChoiceOption[] {
   const source = getQuestionById(sourceQuestionId);
   if (!source || (source.type !== 'multi-select' && source.type !== 'single-select')) return [];
   const selected = answers[sourceQuestionId];
   const selectedIds = Array.isArray(selected) ? selected : selected ? [selected] : [];
-  return source.options.filter((o) => selectedIds.includes(o.id));
+  return source.options.filter((o) => selectedIds.includes(o.id) && !o.exclusive);
 }
 
 export function resolveSelectedLabels(sourceQuestionId: string, answers: AnswersState): string[] {

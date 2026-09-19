@@ -3,6 +3,8 @@ export interface ChoiceOption {
   label: string;
   /** Selecting this option reveals a free-text box, e.g. "Something else (explain)" */
   explain?: boolean;
+  /** "None of the above" style option: selecting it clears every other selection, and vice versa. */
+  exclusive?: boolean;
 }
 
 export interface BaseQuestion {

@@ -11,10 +11,19 @@ interface Props {
 
 export function MultiSelectInput({ question, value, explainValue, onChange, onExplainChange }: Props) {
   function toggle(optionId: string) {
+    const option = question.options.find((o) => o.id === optionId);
+
+    if (option?.exclusive) {
+      onChange(value.includes(optionId) ? [] : [optionId]);
+      return;
+    }
+
     if (value.includes(optionId)) {
       onChange(value.filter((id) => id !== optionId));
     } else {
-      onChange([...value, optionId]);
+      // Selecting a real option clears any "none of the above" style pick, and vice versa.
+      const withoutExclusive = value.filter((id) => !question.options.find((o) => o.id === id)?.exclusive);
+      onChange([...withoutExclusive, optionId]);
     }
   }
 

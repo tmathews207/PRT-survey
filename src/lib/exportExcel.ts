@@ -9,9 +9,14 @@ interface Column {
   header: string;
 }
 
+/** Options a matrix/ranking question can draw rows from -- excludes "none of the above"
+ * style options, matching resolveRowOptions in surveyHelpers.ts, since nobody can rate or
+ * rank a "none" pick. */
 function optionsOf(question: Question | undefined): ChoiceOption[] {
   if (!question) return [];
-  if (question.type === 'single-select' || question.type === 'multi-select') return question.options;
+  if (question.type === 'single-select' || question.type === 'multi-select') {
+    return question.options.filter((o) => !o.exclusive);
+  }
   return [];
 }
 

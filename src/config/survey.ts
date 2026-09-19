@@ -33,6 +33,7 @@ export const SURVEY_PAGES: SurveyPage[] = [
           { id: 'build_teams', label: 'Build teams' },
           { id: 'mental_toughness', label: 'Instill mental toughness' },
           { id: 'leadership_training', label: 'Provide leadership training' },
+          { id: 'none_above', label: 'None of the above', exclusive: true },
         ],
       },
     ],
@@ -301,6 +302,7 @@ export const SURVEY_PAGES: SurveyPage[] = [
           { id: 'airborne_requirements', label: 'everyone could meet airborne school physical requirements.' },
           { id: 'higher_morale', label: 'there would be higher morale.' },
           { id: 'mental_toughness_resilience', label: 'there would be greater mental toughness and/or mental resilience.' },
+          { id: 'none_above', label: 'None of the above.', exclusive: true },
         ],
       },
     ],
@@ -319,7 +321,7 @@ export const SURVEY_PAGES: SurveyPage[] = [
             ? `In the previous question, you indicated that if everyone gave 100% effort at organized PRT then ${joinLabels(
                 labels.map((l) => l.replace(/\.$/, '')),
               )}. Why?`
-            : 'Why do you think that?',
+            : 'In the previous question, you indicated that none of these would necessarily follow from everyone giving 100% effort. Anything you’d like to add?',
         allowPreferNotToAnswer: true,
         maxLength: 1000,
       },
@@ -369,6 +371,7 @@ export const SURVEY_PAGES: SurveyPage[] = [
           { id: 'encourage_others', label: 'encourage others.' },
           { id: 'get_useful_out_of_it', label: 'get out of it what is useful.' },
           { id: 'get_it_over_with', label: 'get it over with.' },
+          { id: 'none_above', label: 'None of the above.', exclusive: true },
         ],
       },
     ],
