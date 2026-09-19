@@ -23,7 +23,7 @@ responses as an Excel file.
    creates the `responses` table and the Row Level Security policies that keep the survey
    anonymous (respondents can only insert, never read).
 3. Go to **Authentication -> Users -> Add user** and create the admin login (email
-   `tmathews207@gmail.com`, choose a password). This is the only account that can read
+   `timmathewsdata@gmail.com`, choose a password). This is the only account that can read
    responses and use the export — matched by email in the RLS policy in `schema.sql`.
 4. Go to **Project Settings -> API** and copy the **Project URL** and **anon public** key.
 

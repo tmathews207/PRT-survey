@@ -35,7 +35,7 @@ create policy "admin can read all"
   on responses
   for select
   to authenticated
-  using (auth.email() = 'tmathews207@gmail.com');
+  using (auth.email() = 'timmathewsdata@gmail.com');
 
 -- After running this file, create the admin login in
--- Authentication -> Users -> Add user (email tmathews207@gmail.com, set a password).
+-- Authentication -> Users -> Add user (email timmathewsdata@gmail.com, set a password).
