@@ -9,6 +9,15 @@ create table if not exists responses (
 
 alter table responses enable row level security;
 
+-- Table-level grants. If your project has "Automatically expose new tables" turned off
+-- (the more secure setting -- Supabase recommends disabling it), a new table gets no
+-- privileges for the anon/authenticated roles by default, and RLS policies alone won't
+-- let anything through: RLS narrows rows *within* an operation the role is already
+-- allowed to attempt, it doesn't grant the operation itself. These two lines grant only
+-- the exact operations each role needs; the policies below then restrict which rows.
+grant insert on responses to anon;
+grant select on responses to authenticated;
+
 -- Anyone (unauthenticated respondents) can submit a response, but can never read any
 -- response back -- including their own. This is what keeps the survey anonymous: the
 -- anon key used by the public survey page has no read access to this table at all.
