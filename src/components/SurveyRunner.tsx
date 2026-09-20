@@ -126,7 +126,7 @@ export function SurveyRunner() {
 
   return (
     <div className="page-container">
-      <ProgressBar current={page.pageNumber} total={TOTAL_PAGES} />
+      <ProgressBar current={step + 1} total={TOTAL_PAGES} />
       <div className="card">
         {page.questions.map((q) => (
           <QuestionBlock key={q.id} question={q} answers={answers} setAnswer={setAnswer} />

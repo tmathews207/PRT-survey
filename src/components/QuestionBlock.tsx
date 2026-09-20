@@ -66,6 +66,7 @@ export function QuestionBlock({ question, answers, setAnswer }: Props) {
           maxLength={question.maxLength}
           allowPreferNotToAnswer={question.allowPreferNotToAnswer}
           ariaLabel={question.id}
+          numeric={question.numeric}
         />
       )}
 

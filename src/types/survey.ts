@@ -40,6 +40,8 @@ export interface FreeTextQuestion extends BaseQuestion {
   /** When set, the prompt is generated at render time from a prior question's selected option labels. */
   promptFromQuestionId?: string;
   promptTemplate?: (selectedLabels: string[]) => string;
+  /** Renders a numeric input (brings up the number pad on mobile) instead of a textarea. */
+  numeric?: boolean;
 }
 
 export interface ImageOption {
@@ -70,7 +72,6 @@ export type Question =
 
 export interface SurveyPage {
   id: string;
-  pageNumber: number;
   questions: Question[];
 }
 

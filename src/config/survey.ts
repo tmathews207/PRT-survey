@@ -16,10 +16,58 @@ export function joinLabels(labels: string[]): string {
   return `${labels.slice(0, -1).join(', ')}, and ${labels[labels.length - 1]}`;
 }
 
+/** Shared by pages 3, 7, and 11: whether the respondent had considered the preceding issue before taking the survey. */
+const THOUGHT_ABOUT_THIS_OPTIONS = [
+  { id: 'thought_before', label: 'I have thought about this issue prior to this survey.' },
+  { id: 'not_thought_before', label: 'I have not thought about this issue prior to this survey.' },
+];
+
 export const SURVEY_PAGES: SurveyPage[] = [
   {
+    id: 'page_fm722',
+    questions: [
+      {
+        id: 'q_fm722',
+        type: 'single-select',
+        prompt: 'Which response best describes your familiarity with FM 7-22?',
+        options: [
+          { id: 'no_idea', label: 'I have no idea what that is.' },
+          { id: 'aware_not_skimmed', label: 'I am aware of it, but have not skimmed it.' },
+          { id: 'skimmed', label: 'I have skimmed it.' },
+          { id: 'read_most', label: 'I have read most of it.' },
+          { id: 'read_all', label: 'I have read all of it.' },
+          { id: 'read_all_reread', label: 'I have read all of it and re-read much of it.' },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'page_resources',
+    questions: [
+      {
+        id: 'q_resources',
+        type: 'multi-select',
+        prompt:
+          'What resources, briefings, or training do you think would be beneficial to most organizations within the Army? Select all that apply.',
+        options: [
+          { id: 'nutrition_lecture', label: 'A lecture on nutrition, provided by a dietician.' },
+          { id: 'prt_lecture', label: 'A lecture on physical readiness training, provided by an H2F professional.' },
+          {
+            id: 'mental_readiness_lecture',
+            label: 'A lecture on mental readiness, provided by a behavioral health professional.',
+          },
+          { id: 'master_nutrition_trainer', label: 'A “master nutrition trainer” course.' },
+          { id: 'h2f_integrator_course', label: 'The current H2F integrator course.' },
+          { id: 'master_mental_readiness_trainer', label: 'A “master mental readiness trainer” course.' },
+          { id: 'resiliency_training', label: 'Resiliency training.' },
+          { id: 'none_useful', label: 'I don’t think any of these would be useful.', exclusive: true },
+          { id: 'other', label: 'Something else (explain).', explain: true },
+        ],
+      },
+    ],
+  },
+  {
     id: 'page1',
-    pageNumber: 1,
     questions: [
       {
         id: 'q1',
@@ -40,7 +88,6 @@ export const SURVEY_PAGES: SurveyPage[] = [
   },
   {
     id: 'page2',
-    pageNumber: 2,
     questions: [
       {
         id: 'q2',
@@ -59,7 +106,6 @@ export const SURVEY_PAGES: SurveyPage[] = [
   },
   {
     id: 'page3',
-    pageNumber: 3,
     questions: [
       {
         id: 'q3a',
@@ -80,7 +126,8 @@ export const SURVEY_PAGES: SurveyPage[] = [
       {
         id: 'q3b',
         type: 'single-select',
-        prompt: 'If organized PRT occurs on a few duty days, and soldiers are left to train on their own on other days:',
+        prompt:
+          'Instead, suppose organized PRT occurs on only a few duty days, and soldiers are left to train on their own on other days:',
         options: [
           { id: 'prescribed', label: 'What they do on those other days should be prescribed by an officer or NCO.' },
           {
@@ -103,16 +150,21 @@ export const SURVEY_PAGES: SurveyPage[] = [
           },
         ],
       },
+      {
+        id: 'q3c',
+        type: 'single-select',
+        prompt: 'Which of these is most accurate?',
+        options: THOUGHT_ABOUT_THIS_OPTIONS,
+      },
     ],
   },
   {
     id: 'page4',
-    pageNumber: 4,
     questions: [
       {
         id: 'q4a',
         type: 'single-select',
-        prompt: 'Select the answer that is most accurate.\n\nMy training from the Army has given me the knowledge necessary to:',
+        prompt: 'Select the answer that is most accurate.\n\nThe Army has given me the knowledge necessary to:',
         options: [
           { id: 'plan_for_self_and_others', label: 'Plan physical training for myself and others.' },
           { id: 'plan_for_self_only', label: 'Only plan my own physical training.' },
@@ -136,7 +188,6 @@ export const SURVEY_PAGES: SurveyPage[] = [
   },
   {
     id: 'page5',
-    pageNumber: 5,
     questions: [
       {
         id: 'q5',
@@ -155,13 +206,12 @@ export const SURVEY_PAGES: SurveyPage[] = [
   },
   {
     id: 'page6',
-    pageNumber: 6,
     questions: [
       {
         id: 'q6a',
         type: 'single-select',
         prompt:
-          'For the following questions, state your preference. Do not select the answer just because you think it is “the right answer.” Select what is closest to your preference.\n\nI prefer physical training:',
+          'For the following questions, state your preference. Do not select the answer just because you think it is “the right answer.”\n\nI prefer physical training:',
         options: [
           { id: 'large_group', label: 'as a large group.' },
           { id: 'small_group', label: 'as a small group.' },
@@ -172,7 +222,7 @@ export const SURVEY_PAGES: SurveyPage[] = [
       {
         id: 'q6b',
         type: 'single-select',
-        prompt: 'I prefer physical training with people who:',
+        prompt: 'If training with others, I prefer physical training with people who:',
         options: [
           { id: 'similar_goals', label: 'have similar fitness goals.' },
           { id: 'different_goals', label: 'have different fitness goals.' },
@@ -183,7 +233,7 @@ export const SURVEY_PAGES: SurveyPage[] = [
       {
         id: 'q6c',
         type: 'single-select',
-        prompt: 'I prefer training in:',
+        prompt: 'If training with others, I prefer training in:',
         options: [
           { id: 'similar_ability', label: 'a group of similar ability.' },
           { id: 'mixed_ability', label: 'a group of mixed abilities.' },
@@ -195,7 +245,6 @@ export const SURVEY_PAGES: SurveyPage[] = [
   },
   {
     id: 'page7',
-    pageNumber: 7,
     questions: [
       {
         id: 'q7',
@@ -216,11 +265,16 @@ export const SURVEY_PAGES: SurveyPage[] = [
           { id: 'no_preference', label: 'I really don’t have any preference.' },
         ],
       },
+      {
+        id: 'q7b',
+        type: 'single-select',
+        prompt: 'Which of these is most accurate?',
+        options: THOUGHT_ABOUT_THIS_OPTIONS,
+      },
     ],
   },
   {
     id: 'page8',
-    pageNumber: 8,
     questions: [
       {
         id: 'q8a',
@@ -250,7 +304,6 @@ export const SURVEY_PAGES: SurveyPage[] = [
   },
   {
     id: 'page9',
-    pageNumber: 9,
     questions: [
       {
         id: 'q9',
@@ -267,7 +320,6 @@ export const SURVEY_PAGES: SurveyPage[] = [
   },
   {
     id: 'page10',
-    pageNumber: 10,
     questions: [
       {
         id: 'q10',
@@ -288,7 +340,6 @@ export const SURVEY_PAGES: SurveyPage[] = [
   },
   {
     id: 'page11',
-    pageNumber: 11,
     questions: [
       {
         id: 'q11',
@@ -305,11 +356,16 @@ export const SURVEY_PAGES: SurveyPage[] = [
           { id: 'none_above', label: 'None of the above.', exclusive: true },
         ],
       },
+      {
+        id: 'q11b',
+        type: 'single-select',
+        prompt: 'Which of these is most accurate?',
+        options: THOUGHT_ABOUT_THIS_OPTIONS,
+      },
     ],
   },
   {
     id: 'page12',
-    pageNumber: 12,
     questions: [
       {
         id: 'q12_why',
@@ -329,7 +385,6 @@ export const SURVEY_PAGES: SurveyPage[] = [
   },
   {
     id: 'page13',
-    pageNumber: 13,
     questions: [
       {
         id: 'q13',
@@ -347,7 +402,6 @@ export const SURVEY_PAGES: SurveyPage[] = [
   },
   {
     id: 'page14',
-    pageNumber: 14,
     questions: [
       {
         id: 'q14a',
@@ -372,6 +426,99 @@ export const SURVEY_PAGES: SurveyPage[] = [
           { id: 'get_useful_out_of_it', label: 'get out of it what is useful.' },
           { id: 'get_it_over_with', label: 'get it over with.' },
           { id: 'none_above', label: 'None of the above.', exclusive: true },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'page_belief_sleep_nutrition',
+    questions: [
+      {
+        id: 'q_sleep_belief',
+        type: 'single-select',
+        prompt:
+          'If a soldier understands the importance of getting consistent, uninterrupted, quality sleep of adequate duration, then the soldier will prioritize sleep.',
+        options: [
+          { id: 'accurate', label: 'This is accurate.' },
+          { id: 'mostly_accurate', label: 'This is mostly accurate.' },
+          { id: 'half_right', label: 'This is about half right.' },
+          { id: 'mostly_inaccurate', label: 'This is mostly inaccurate.' },
+          { id: 'inaccurate', label: 'This is inaccurate.' },
+        ],
+      },
+      {
+        id: 'q_nutrition_belief',
+        type: 'single-select',
+        prompt:
+          'If a soldier understands the importance of good nutrition and knows how to ensure he or she consumes appropriate portions and types of food, then the soldier will have a healthy diet.',
+        options: [
+          { id: 'accurate', label: 'This is accurate.' },
+          { id: 'mostly_accurate', label: 'This is mostly accurate.' },
+          { id: 'half_right', label: 'This is about half right.' },
+          { id: 'mostly_inaccurate', label: 'This is mostly inaccurate.' },
+          { id: 'inaccurate', label: 'This is inaccurate.' },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'page_sleep_habits',
+    questions: [
+      {
+        id: 'q_sleep_hours',
+        type: 'free-text',
+        prompt: 'How many hours of sleep do you get, on average, each night?',
+        numeric: true,
+      },
+      {
+        id: 'q_sleep_consistency',
+        type: 'single-select',
+        prompt: 'Do you have a consistent bed time and wake time?',
+        options: [
+          { id: 'yes', label: 'Yes' },
+          { id: 'no', label: 'No' },
+          { id: 'sometimes', label: 'Sometimes' },
+          { id: 'other', label: 'Other (explain)', explain: true },
+        ],
+      },
+      {
+        id: 'q_sleep_rested',
+        type: 'single-select',
+        prompt: 'Do you generally feel well rested when you wake up?',
+        options: [
+          { id: 'yes', label: 'Yes' },
+          { id: 'no', label: 'No' },
+          { id: 'sometimes', label: 'Sometimes' },
+          { id: 'other', label: 'Other (explain)', explain: true },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'page_diet_dfac',
+    questions: [
+      {
+        id: 'q_diet_rating',
+        type: 'single-select',
+        prompt: 'How would you rate your diet?',
+        options: [
+          { id: 'always_very_healthy', label: 'I always consume a very healthy diet.' },
+          { id: 'usually_healthy', label: 'I usually have a healthy diet.' },
+          { id: 'sometimes_well', label: 'I sometimes eat well; sometimes not.' },
+          { id: 'often_unhealthy', label: 'My diet is often unhealthy.' },
+          { id: 'energy_drinks_fast_food', label: 'Pretty much living off energy drinks and fast food.' },
+        ],
+      },
+      {
+        id: 'q_dfac_view',
+        type: 'single-select',
+        prompt: 'Which statement best describes your view of Warrior Dining Facilities?',
+        options: [
+          { id: 'impractical', label: 'Their location and/or hours make them impractical for me.' },
+          { id: 'not_interested', label: 'I am not interested in eating there.' },
+          { id: 'eat_when_can', label: 'I eat at them when I can.' },
+          { id: 'eat_often', label: 'I eat at them often.' },
+          { id: 'other', label: 'Other (explain).', explain: true },
         ],
       },
     ],
