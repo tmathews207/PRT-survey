@@ -1,4 +1,5 @@
 import type { AnswersState, Question } from '../types/survey';
+import type { PromptOverrides } from '../lib/promptOverrides';
 import { explainKey, resolveRowOptions, resolveSelectedLabels } from '../lib/surveyHelpers';
 import { SingleSelectInput } from './questions/SingleSelect';
 import { MultiSelectInput } from './questions/MultiSelect';
@@ -11,19 +12,26 @@ interface Props {
   question: Question;
   answers: AnswersState;
   setAnswer: (questionId: string, value: AnswersState[string]) => void;
+  /** Admin-edited prompt text, keyed by question id. A dynamically-generated prompt
+   * (promptFromQuestionId) is never overridden -- there's no fixed string to replace. */
+  promptOverrides?: PromptOverrides;
 }
 
-export function QuestionBlock({ question, answers, setAnswer }: Props) {
+export function QuestionBlock({ question, answers, setAnswer, promptOverrides }: Props) {
   const promptHtml = 'promptHtml' in question ? question.promptHtml : undefined;
+  const override = promptOverrides?.[question.id];
+  const isDynamicPrompt = question.type === 'free-text' && !!question.promptFromQuestionId;
 
   return (
     <div className="question-block">
-      {question.type === 'free-text' && question.promptFromQuestionId ? (
+      {isDynamicPrompt ? (
         <p className="question-prompt">
           {question.promptTemplate
-            ? question.promptTemplate(resolveSelectedLabels(question.promptFromQuestionId, answers))
+            ? question.promptTemplate(resolveSelectedLabels(question.promptFromQuestionId!, answers))
             : question.prompt}
         </p>
+      ) : override ? (
+        <p className="question-prompt">{override}</p>
       ) : promptHtml ? (
         <p className="question-prompt" dangerouslySetInnerHTML={{ __html: promptHtml }} />
       ) : (

@@ -7,6 +7,7 @@ import { ProgressBar } from './ProgressBar';
 import { QuestionBlock } from './QuestionBlock';
 import { isPageComplete } from '../lib/validation';
 import { submitResponse } from '../lib/submitResponse';
+import { fetchPromptOverrides, type PromptOverrides } from '../lib/promptOverrides';
 
 const DRAFT_KEY = 'prt-survey-draft-v1';
 
@@ -44,6 +45,7 @@ export function SurveyRunner() {
   const [step, setStep] = useState<Step>('welcome');
   const [answers, setAnswers] = useState<AnswersState>({});
   const [error, setError] = useState<string | null>(null);
+  const [promptOverrides, setPromptOverrides] = useState<PromptOverrides>({});
 
   useEffect(() => {
     const draft = loadDraft();
@@ -51,6 +53,10 @@ export function SurveyRunner() {
       setStep(draft.step);
       setAnswers(draft.answers);
     }
+  }, []);
+
+  useEffect(() => {
+    fetchPromptOverrides().then(setPromptOverrides);
   }, []);
 
   useEffect(() => {
@@ -129,7 +135,7 @@ export function SurveyRunner() {
       <ProgressBar current={step + 1} total={TOTAL_PAGES} />
       <div className="card">
         {page.questions.map((q) => (
-          <QuestionBlock key={q.id} question={q} answers={answers} setAnswer={setAnswer} />
+          <QuestionBlock key={q.id} question={q} answers={answers} setAnswer={setAnswer} promptOverrides={promptOverrides} />
         ))}
       </div>
       {error && <p className="error-text">{error}</p>}

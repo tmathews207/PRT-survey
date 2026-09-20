@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import type { Session } from '@supabase/supabase-js';
 import { supabase, type ResponseRow } from '../lib/supabase';
 import { exportResponsesToExcel } from '../lib/exportExcel';
+import { AdminSurveyEditor } from './AdminSurveyEditor';
 
 export function AdminPage() {
   const [session, setSession] = useState<Session | null | 'loading'>('loading');
@@ -22,7 +23,7 @@ export function AdminPage() {
     );
   }
 
-  return session ? <AdminDashboard /> : <AdminLogin />;
+  return session ? <AdminShell /> : <AdminLogin />;
 }
 
 function AdminLogin() {
@@ -79,6 +80,35 @@ function AdminLogin() {
   );
 }
 
+type AdminTab = 'responses' | 'editor';
+
+function AdminShell() {
+  const [tab, setTab] = useState<AdminTab>('responses');
+
+  return (
+    <div className="page-container">
+      <div className="card">
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <h1 style={{ margin: 0 }}>{tab === 'responses' ? 'Survey Responses' : 'Preview & Edit Survey Text'}</h1>
+          <button className="btn" style={{ background: 'transparent' }} onClick={() => supabase.auth.signOut()}>
+            Sign out
+          </button>
+        </div>
+        <div className="admin-tabs">
+          <button className={`admin-tab${tab === 'responses' ? ' active' : ''}`} onClick={() => setTab('responses')}>
+            Responses
+          </button>
+          <button className={`admin-tab${tab === 'editor' ? ' active' : ''}`} onClick={() => setTab('editor')}>
+            Preview &amp; Edit Text
+          </button>
+        </div>
+      </div>
+
+      {tab === 'responses' ? <AdminDashboard /> : <AdminSurveyEditor />}
+    </div>
+  );
+}
+
 function AdminDashboard() {
   const [responses, setResponses] = useState<ResponseRow[] | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -112,43 +142,34 @@ function AdminDashboard() {
   }
 
   return (
-    <div className="page-container">
-      <div className="card">
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <h1 style={{ margin: 0 }}>Survey Responses</h1>
-          <button className="btn" style={{ background: 'transparent' }} onClick={() => supabase.auth.signOut()}>
-            Sign out
+    <div className="card">
+      {error && <p className="error-text">{error}</p>}
+
+      {responses === null ? (
+        <p className="muted">Loading responses...</p>
+      ) : (
+        <>
+          <p>
+            <span className="admin-stat">{responses.length}</span>
+            <br />
+            <span className="muted">response{responses.length === 1 ? '' : 's'} submitted</span>
+          </p>
+          <button
+            className="btn btn-primary btn-block"
+            onClick={handleExport}
+            disabled={exporting || responses.length === 0}
+          >
+            {exporting ? 'Preparing file...' : 'Download Excel'}
           </button>
-        </div>
-
-        {error && <p className="error-text">{error}</p>}
-
-        {responses === null ? (
-          <p className="muted">Loading responses...</p>
-        ) : (
-          <>
-            <p>
-              <span className="admin-stat">{responses.length}</span>
-              <br />
-              <span className="muted">response{responses.length === 1 ? '' : 's'} submitted</span>
-            </p>
-            <button
-              className="btn btn-primary btn-block"
-              onClick={handleExport}
-              disabled={exporting || responses.length === 0}
-            >
-              {exporting ? 'Preparing file...' : 'Download Excel'}
-            </button>
-            <button
-              className="btn btn-block"
-              style={{ marginTop: 10, background: 'transparent', border: '1px solid var(--border)' }}
-              onClick={loadResponses}
-            >
-              Refresh
-            </button>
-          </>
-        )}
-      </div>
+          <button
+            className="btn btn-block"
+            style={{ marginTop: 10, background: 'transparent', border: '1px solid var(--border)' }}
+            onClick={loadResponses}
+          >
+            Refresh
+          </button>
+        </>
+      )}
     </div>
   );
 }

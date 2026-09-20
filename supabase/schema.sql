@@ -39,3 +39,36 @@ create policy "admin can read all"
 
 -- After running this file, create the admin login in
 -- Authentication -> Users -> Add user (email timmathewsdata@gmail.com, set a password).
+
+-- Lets the admin edit a question's prompt text from /admin without a code change or
+-- redeploy. Pages, questions, answer options, and ordering all still live in code
+-- (src/config/survey.ts) -- this table only ever overrides the wording of a prompt.
+-- One row per overridden question; a question with no row here just shows its
+-- hardcoded default text.
+create table if not exists question_text_overrides (
+  question_id text primary key,
+  prompt text not null,
+  updated_at timestamptz not null default now()
+);
+
+alter table question_text_overrides enable row level security;
+
+-- Everyone (including anonymous respondents) needs to read these, since an edit must
+-- show up on the live survey for whoever takes it next.
+grant select on question_text_overrides to anon;
+grant select, insert, update, delete on question_text_overrides to authenticated;
+
+drop policy if exists "anyone can read prompt overrides" on question_text_overrides;
+create policy "anyone can read prompt overrides"
+  on question_text_overrides
+  for select
+  to anon, authenticated
+  using (true);
+
+drop policy if exists "admin can write prompt overrides" on question_text_overrides;
+create policy "admin can write prompt overrides"
+  on question_text_overrides
+  for all
+  to authenticated
+  using (auth.email() = 'timmathewsdata@gmail.com')
+  with check (auth.email() = 'timmathewsdata@gmail.com');
