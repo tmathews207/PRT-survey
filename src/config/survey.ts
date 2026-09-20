@@ -238,6 +238,7 @@ export const SURVEY_PAGES: SurveyPage[] = [
       {
         id: 'q6b',
         type: 'single-select',
+        image: { src: '/illustrations/gym-group-training.webp', alt: 'A group of soldiers training together in a gym' },
         prompt: 'If training with others, I prefer physical training with people who:',
         options: [
           { id: 'similar_goals', label: 'have similar fitness goals.' },
@@ -414,6 +415,12 @@ export const SURVEY_PAGES: SurveyPage[] = [
           { id: 'other', label: 'something else (explain).', explain: true },
         ],
       },
+      {
+        id: 'q13_why',
+        type: 'free-text',
+        image: { src: '/illustrations/effort-dial-max.webp', alt: 'A "Level of Effort" dial with every setting labeled MAX' },
+        prompt: 'Why?',
+      },
     ],
   },
   {
@@ -459,6 +466,10 @@ export const SURVEY_PAGES: SurveyPage[] = [
       {
         id: 'q_nutrition_belief',
         type: 'single-select',
+        image: {
+          src: '/illustrations/more-you-know-sleep-nutrition.webp',
+          alt: '"The More You Know" logo, styled with a rainbow and star, subtitled "about sleep and nutrition"',
+        },
         prompt:
           'If a soldier understands the importance of good nutrition and knows how to ensure he or she consumes appropriate portions and types of food, then the soldier will have a healthy diet.',
         options: ACCURACY_SCALE_OPTIONS,
@@ -496,6 +507,10 @@ export const SURVEY_PAGES: SurveyPage[] = [
       {
         id: 'q_others_sleep_belief',
         type: 'single-select',
+        image: {
+          src: '/illustrations/drake-meme-diet-sleep.webp',
+          alt: 'A four-panel "Drake meme" rejecting beer, energy drinks, and fast food, and approving of a salad and a made bed',
+        },
         prompt: 'Most soldiers get consistent, quality sleep of adequate duration.',
         options: ACCURACY_SCALE_OPTIONS,
       },
