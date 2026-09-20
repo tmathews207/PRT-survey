@@ -24,6 +24,7 @@ export function QuestionBlock({ question, answers, setAnswer, promptOverrides }:
 
   return (
     <div className="question-block">
+      {question.image && <img className="question-image" src={question.image.src} alt={question.image.alt} />}
       {isDynamicPrompt ? (
         <p className="question-prompt">
           {question.promptTemplate

@@ -38,6 +38,7 @@ export const SURVEY_PAGES: SurveyPage[] = [
       {
         id: 'q_fm722',
         type: 'single-select',
+        image: { src: '/illustrations/soldier-reading-fm722.webp', alt: 'A soldier reading FM 7-22 in bed' },
         prompt: 'Which response best describes your familiarity with FM 7-22?',
         options: [
           { id: 'no_idea', label: 'I have no idea what that is.' },
@@ -56,6 +57,7 @@ export const SURVEY_PAGES: SurveyPage[] = [
       {
         id: 'q_resources',
         type: 'multi-select',
+        image: { src: '/illustrations/instructor-teaching-class.webp', alt: 'An H2F instructor teaching a class of soldiers' },
         prompt:
           'What resources, briefings, or training do you think would be beneficial to most organizations within the Army? Select all that apply.',
         options: [
@@ -81,6 +83,7 @@ export const SURVEY_PAGES: SurveyPage[] = [
       {
         id: 'q1',
         type: 'multi-select',
+        image: { src: '/illustrations/notepad-purpose.webp', alt: 'A handwritten notepad reading "PRT plan, Task: 100 burpees, Purpose: ?"' },
         prompt: 'The purpose of physical readiness training is to (choose all that apply):',
         options: [
           { id: 'raise_aft', label: 'Raise AFT scores' },
@@ -184,6 +187,10 @@ export const SURVEY_PAGES: SurveyPage[] = [
       {
         id: 'q4b',
         type: 'single-select',
+        image: {
+          src: '/illustrations/eisenhower-planning-quote.webp',
+          alt: 'Dwight D. Eisenhower with the quote "Plans are worthless, but planning is everything."',
+        },
         prompt:
           'Knowledge that I have obtained elsewhere (college major, credentialing, a coach, self-study, etc) has given me the knowledge necessary to:',
         options: [

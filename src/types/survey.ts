@@ -14,6 +14,8 @@ export interface BaseQuestion {
   /** Optional HTML override of the prompt (only used where a word must be underlined/italicized). */
   promptHtml?: string;
   required?: boolean; // defaults to true
+  /** An illustration shown above this question's prompt. */
+  image?: { src: string; alt: string };
 }
 
 export interface SingleSelectQuestion extends BaseQuestion {
