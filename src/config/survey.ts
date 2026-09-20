@@ -22,6 +22,15 @@ const THOUGHT_ABOUT_THIS_OPTIONS = [
   { id: 'not_thought_before', label: 'I have not thought about this issue prior to this survey.' },
 ];
 
+/** Shared 5-point agreement scale used by the sleep/nutrition belief and awareness questions. */
+const ACCURACY_SCALE_OPTIONS = [
+  { id: 'accurate', label: 'This is accurate.' },
+  { id: 'mostly_accurate', label: 'This is mostly accurate.' },
+  { id: 'half_right', label: 'This is about half right.' },
+  { id: 'mostly_inaccurate', label: 'This is mostly inaccurate.' },
+  { id: 'inaccurate', label: 'This is inaccurate.' },
+];
+
 export const SURVEY_PAGES: SurveyPage[] = [
   {
     id: 'page_fm722',
@@ -438,26 +447,50 @@ export const SURVEY_PAGES: SurveyPage[] = [
         type: 'single-select',
         prompt:
           'If a soldier understands the importance of getting consistent, uninterrupted, quality sleep of adequate duration, then the soldier will prioritize sleep.',
-        options: [
-          { id: 'accurate', label: 'This is accurate.' },
-          { id: 'mostly_accurate', label: 'This is mostly accurate.' },
-          { id: 'half_right', label: 'This is about half right.' },
-          { id: 'mostly_inaccurate', label: 'This is mostly inaccurate.' },
-          { id: 'inaccurate', label: 'This is inaccurate.' },
-        ],
+        options: ACCURACY_SCALE_OPTIONS,
       },
       {
         id: 'q_nutrition_belief',
         type: 'single-select',
         prompt:
           'If a soldier understands the importance of good nutrition and knows how to ensure he or she consumes appropriate portions and types of food, then the soldier will have a healthy diet.',
-        options: [
-          { id: 'accurate', label: 'This is accurate.' },
-          { id: 'mostly_accurate', label: 'This is mostly accurate.' },
-          { id: 'half_right', label: 'This is about half right.' },
-          { id: 'mostly_inaccurate', label: 'This is mostly inaccurate.' },
-          { id: 'inaccurate', label: 'This is inaccurate.' },
-        ],
+        options: ACCURACY_SCALE_OPTIONS,
+      },
+    ],
+  },
+  {
+    id: 'page_awareness_diet_sleep',
+    questions: [
+      {
+        id: 'q_diet_awareness',
+        type: 'single-select',
+        prompt:
+          'Most Soldiers understand that fast food, soda, alcohol, tobacco, illicit drugs, candy, energy drinks, and added sugars are generally unhealthy. They understand that fruits, vegetables, and lean meat are generally healthy.',
+        options: ACCURACY_SCALE_OPTIONS,
+      },
+      {
+        id: 'q_sleep_awareness',
+        type: 'single-select',
+        prompt:
+          'Most soldiers understand that consistent, quality sleep of adequate duration is necessary for them to recover from workouts, and perform at their physical and mental peak.',
+        options: ACCURACY_SCALE_OPTIONS,
+      },
+    ],
+  },
+  {
+    id: 'page_belief_others_diet_sleep',
+    questions: [
+      {
+        id: 'q_others_diet_belief',
+        type: 'single-select',
+        prompt: 'Most Soldiers have a healthy diet.',
+        options: ACCURACY_SCALE_OPTIONS,
+      },
+      {
+        id: 'q_others_sleep_belief',
+        type: 'single-select',
+        prompt: 'Most soldiers get consistent, quality sleep of adequate duration.',
+        options: ACCURACY_SCALE_OPTIONS,
       },
     ],
   },
