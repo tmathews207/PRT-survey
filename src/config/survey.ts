@@ -31,6 +31,21 @@ const ACCURACY_SCALE_OPTIONS = [
   { id: 'inaccurate', label: 'This is inaccurate.' },
 ];
 
+/** Shared by the final page's two strength & conditioning questions (defining vs. applying the concepts). */
+const STRENGTH_CONDITIONING_CONCEPT_OPTIONS = [
+  { id: 'frequency', label: 'Frequency' },
+  { id: 'volume', label: 'Volume' },
+  { id: 'intensity', label: 'Intensity' },
+  { id: 'reps_in_reserve', label: 'Repetitions in reserve' },
+  { id: 'rpe', label: 'Rate of perceived exertion' },
+  { id: 'autoregulation', label: 'Autoregulation' },
+  { id: 'range_of_motion', label: 'Range of motion' },
+  { id: 'exercise_order', label: 'Exercise order' },
+  { id: 'progressive_overload', label: 'Progressive loading or overload' },
+  { id: 'recovery', label: 'Recovery' },
+  { id: 'none_above', label: 'None of the above', exclusive: true },
+];
+
 export const SURVEY_PAGES: SurveyPage[] = [
   {
     id: 'page_fm722',
@@ -361,6 +376,7 @@ export const SURVEY_PAGES: SurveyPage[] = [
       {
         id: 'q11',
         type: 'multi-select',
+        image: { src: '/illustrations/soldier-deadlift.webp', alt: 'A soldier straining through a maximal-effort deadlift' },
         prompt:
           'For the following questions, state your opinion.\n\nIf everyone gave 100% effort at organized PRT, people would occasionally be on profile, but in general (check all that apply):',
         options: [
@@ -420,6 +436,25 @@ export const SURVEY_PAGES: SurveyPage[] = [
         type: 'free-text',
         image: { src: '/illustrations/effort-dial-max.webp', alt: 'A "Level of Effort" dial with every setting labeled MAX' },
         prompt: 'Why?',
+      },
+      {
+        id: 'q13_influences',
+        type: 'multi-select',
+        prompt: 'The previous question asked for your opinion. What are the greatest influences on your opinion?',
+        options: [
+          { id: 'tradition', label: 'Tradition' },
+          { id: 'personal_preference', label: 'Personal preference' },
+          { id: 'doctrine', label: 'Doctrine' },
+          {
+            id: 'formal_education',
+            label: 'Formal education in strength & conditioning, exercise physiology, or similar degree',
+          },
+          { id: 'experience', label: 'Experience' },
+          { id: 'research', label: 'Research' },
+          { id: 'discussion_with_others', label: 'Discussion with others' },
+          { id: 'intuition', label: 'Intuition' },
+          { id: 'none_above', label: 'None of the above', exclusive: true },
+        ],
       },
     ],
   },
@@ -575,6 +610,25 @@ export const SURVEY_PAGES: SurveyPage[] = [
           { id: 'eat_often', label: 'I eat at them often.' },
           { id: 'other', label: 'Other (explain).', explain: true },
         ],
+      },
+    ],
+  },
+  {
+    id: 'page_sc_concepts',
+    questions: [
+      {
+        id: 'q_sc_define',
+        type: 'multi-select',
+        prompt:
+          'I could give a reasonably accurate definition of the following variables and concepts, as they apply in a strength & conditioning context (check all that apply).',
+        options: STRENGTH_CONDITIONING_CONCEPT_OPTIONS,
+      },
+      {
+        id: 'q_sc_apply',
+        type: 'multi-select',
+        prompt:
+          'I could apply the following variables or concepts to plan a few weeks of training for myself or someone else (check all that apply).',
+        options: STRENGTH_CONDITIONING_CONCEPT_OPTIONS,
       },
     ],
   },
