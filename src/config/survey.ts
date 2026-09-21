@@ -632,6 +632,135 @@ export const SURVEY_PAGES: SurveyPage[] = [
       },
     ],
   },
+  {
+    id: 'page_grit_mental_toughness',
+    questions: [
+      {
+        id: 'q_grit_mental_toughness',
+        type: 'single-select',
+        prompt: 'Which of these do you think is most accurate about the traits of grit and/or mental toughness?',
+        promptHtml:
+          'Which of these do you think is most accurate about the traits of <u><strong>grit</strong></u> and/or <u><strong>mental toughness</strong></u>?',
+        options: [
+          { id: 'trainable', label: 'They can be trained and improved at PRT.' },
+          { id: 'maybe_trainable_not_sure', label: 'They can perhaps be trained or improved at PRT. I’m not sure.' },
+          {
+            id: 'trainable_but_unqualified',
+            label:
+              'They can be trained, but it’s complicated, and none of us are qualified to attempt it. We’ll just injure people.',
+          },
+          {
+            id: 'demonstrated_not_changed',
+            label: 'They can be demonstrated at PRT. But you either have it or you don’t. PRT isn’t changing that.',
+          },
+          { id: 'too_ambiguous', label: 'They are too ambiguous to reliably assess.' },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'page_training_through_injury',
+    questions: [
+      {
+        id: 'q_training_through_injury',
+        type: 'multi-select',
+        image: {
+          src: '/illustrations/soldier-crutches-injury.webp',
+          alt: 'A soldier on crutches with a cast reading "Still in the Fight," walking past a shocked medic',
+        },
+        prompt: 'In your opinion, training through an injury (select all that apply):',
+        options: [
+          { id: 'builds_mental_toughness', label: 'builds mental toughness.' },
+          { id: 'prevents_healing', label: 'prevents proper healing and increases risk of re-injury.' },
+          { id: 'not_a_big_deal', label: 'is not a big deal.' },
+          { id: 'fine_if_not_excruciating', label: 'is fine if you’re not in excruciating pain.' },
+          { id: 'other', label: 'something else (explain).', explain: true },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'page_fitness_goals',
+    questions: [
+      {
+        id: 'q_fitness_goals',
+        type: 'multi-select',
+        prompt: 'Do you have any of the following physical fitness goals (check all that apply)?',
+        options: [
+          {
+            id: 'distance_goal',
+            label: 'To run, row, bike, ski, or swim a certain distance (e.g. a 10k, marathon, triathlon, etc)',
+          },
+          {
+            id: 'pace_goal',
+            label:
+              'A certain pace for a fixed distance run, row, bike, ski, or swim (e.g. run a 6-minute mile; a 3:30 marathon)',
+          },
+          { id: 'aft_score_goal', label: 'A certain score on the AFT' },
+          { id: 'one_rep_max_goal', label: 'A personal best 1-repetition maximum for one or more lifts' },
+          { id: 'rep_pr_goal', label: 'A personal best number of repetitions for a given activity' },
+          { id: 'none', label: 'None', exclusive: true },
+          { id: 'other', label: 'Other (explain)', explain: true },
+        ],
+      },
+    ],
+  },
+  {
+    id: 'page_recovery_readiness',
+    questions: [
+      {
+        id: 'q_sleep_readiness',
+        type: 'single-select',
+        prompt:
+          'For the three questions below, select the answers that are closest to your opinion.\n\nIf I have not been sleeping well, then:',
+        options: [
+          {
+            id: 'push_harder',
+            label:
+              'I should push harder at PRT, because any benefit I might have gotten from sleep now needs to be obtained through physical effort.',
+          },
+          { id: 'push_normally', label: 'I should push myself as I normally would.' },
+          {
+            id: 'push_less',
+            label:
+              'I should not push myself as hard at PRT, because I am at a lower state of readiness and greater exertion may be more than I can recover from.',
+          },
+        ],
+      },
+      {
+        id: 'q_nutrition_readiness',
+        type: 'single-select',
+        prompt: 'If I have not been eating well, then:',
+        options: [
+          {
+            id: 'push_harder',
+            label:
+              'I should push harder at PRT, because any benefit I might have gotten from nutrition now needs to be obtained through physical effort.',
+          },
+          { id: 'push_normally', label: 'I should push myself as I normally would.' },
+          {
+            id: 'push_less',
+            label:
+              'I should not push myself as hard at PRT, because I am at a lower state of readiness and greater exertion may be more than I can recover from.',
+          },
+        ],
+      },
+      {
+        id: 'q_training_load_readiness',
+        type: 'single-select',
+        prompt: 'If I have not been training very hard over the last week or two, then:',
+        options: [
+          { id: 'push_harder', label: 'I should push myself extra hard today at PRT, to make up for lost training time.' },
+          { id: 'push_normally', label: 'I should push myself as I normally would.' },
+          {
+            id: 'push_less',
+            label:
+              'I should not push myself as hard at PRT, because I am at a lower state of readiness and greater exertion may be more than I can recover from.',
+          },
+        ],
+      },
+    ],
+  },
 ];
 
 export const TOTAL_PAGES = SURVEY_PAGES.length;
