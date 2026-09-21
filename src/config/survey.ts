@@ -6,7 +6,7 @@ There are no trick questions. There are no right or wrong answers, since this su
 
 This survey takes about 5 minutes, unless you want to type lengthy comments.`;
 
-export const INSTRUCTIONS_TEXT = `When completing this survey, assume that you are in an OSJA that supports a GCMCA and has installation support responsibilities (so, for example, XVIII ABN Corps, 3ID, JRTC & Fort Polk, etc), or that you are in a brigade legal office that regularly conducts PRT with the OSJA. The OSJA has technical supervision over several legal offices that support tenant brigades. Your OSJA has an SJA, CPNCO, DSJA, at least one legal administrator, a senior Civilian, at least 3 divisions within the office, and the personnel are approximately 40% officers, 30% NCOs, 20% junior enlisted, and 10% Civilians. Most Soldiers will serve 2 to 4 years in that location and then PCS or ETS.`;
+export const INSTRUCTIONS_TEXT = `When completing this survey, assume that you are in an OSJA that supports a GCMCA and has installation support responsibilities (so, for example, XVIII ABN Corps, 3ID, JRTC & Fort Polk, etc), or that you are in a brigade legal office that regularly conducts PRT with the OSJA.`;
 
 /** Joins option labels into a readable sentence fragment: "a, b, and c" / "a and b" / "a" */
 export function joinLabels(labels: string[]): string {
